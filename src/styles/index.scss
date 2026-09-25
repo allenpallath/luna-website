@@ -1,0 +1,208 @@
+@use './tokens' as tokens;
+
+html {
+  scroll-behavior: smooth;
+  background: tokens.$paper;
+  scrollbar-width: thin;
+  scrollbar-color: tokens.$border-strong tokens.$surface-muted;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: tokens.$surface-muted; }
+::-webkit-scrollbar-thumb {
+  background: tokens.$border-strong;
+  border: 2px solid tokens.$surface-muted;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: tokens.$text-muted; }
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: tokens.$paper;
+  color: tokens.$ink;
+  font-family: tokens.$font-sans;
+}
+
+.font-sans { font-family: tokens.$font-sans; }
+.font-display { font-family: tokens.$font-display; }
+.font-mono { font-family: tokens.$font-mono; }
+
+section[id] { scroll-margin-top: 5.5rem; }
+section[id]:not(#overview) {
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+}
+
+@media (pointer: coarse) {
+  button,
+  .ui-button { min-height: 2.75rem; }
+}
+
+.coat-parallax-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('/images/luna-roan-pattern.svg');
+  background-position: center 0;
+  background-repeat: repeat;
+  background-size: 900px 900px;
+  opacity: 0;
+  will-change: background-position, opacity;
+  transition: opacity 180ms linear;
+}
+
+@media (max-width: 640px) {
+  .coat-parallax-background { background-size: 520px 520px; }
+}
+
+.luna-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+  will-change: transform;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: -16px;
+    width: 64px;
+    height: 64px;
+    max-width: none;
+    user-select: none;
+  }
+
+  &__head {
+    animation: luna-cursor-idle 1.8s ease-in-out infinite;
+    transform-origin: 50% 70%;
+  }
+
+  &__expression {
+    opacity: 0;
+    animation: luna-cursor-expression 4.2s ease-in-out infinite;
+  }
+
+  &.is-visible { opacity: 1; }
+}
+
+@keyframes luna-cursor-idle {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-1.5px) rotate(2deg); }
+}
+
+@keyframes luna-cursor-expression {
+  0%, 82%, 92%, 100% { opacity: 0; }
+  85%, 89% { opacity: 1; }
+}
+
+@media (pointer: fine) {
+  .luna-cursor-enabled,
+  .luna-cursor-enabled * { cursor: none !important; }
+
+  .luna-cursor-enabled input,
+  .luna-cursor-enabled textarea,
+  .luna-cursor-enabled [contenteditable='true'] { cursor: text !important; }
+}
+
+.bg-luna-coat {
+  background-color: tokens.$paper;
+  background-image:
+    radial-gradient(ellipse 18rem 14rem at 9% 16%, rgb(24 24 27 / 9%) 0 18%, rgb(24 24 27 / 4%) 38%, transparent 74%),
+    radial-gradient(ellipse 22rem 15rem at 91% 23%, rgb(24 24 27 / 8%) 0 16%, rgb(24 24 27 / 3%) 42%, transparent 76%),
+    radial-gradient(ellipse 19rem 17rem at 25% 80%, rgb(24 24 27 / 8%) 0 18%, rgb(24 24 27 / 3%) 44%, transparent 77%),
+    radial-gradient(ellipse 23rem 16rem at 78% 83%, rgb(24 24 27 / 9%) 0 16%, rgb(24 24 27 / 3%) 40%, transparent 75%),
+    radial-gradient(ellipse 9rem 7rem at 52% 48%, rgb(24 24 27 / 5%) 0 16%, transparent 76%),
+    radial-gradient(ellipse 2px 1.5px at 13% 21%, rgb(24 24 27 / 24%) 60%, transparent 100%),
+    radial-gradient(ellipse 1.5px 2px at 66% 63%, rgb(24 24 27 / 20%) 60%, transparent 100%),
+    radial-gradient(ellipse 2.5px 1.5px at 37% 82%, rgb(24 24 27 / 22%) 60%, transparent 100%),
+    radial-gradient(ellipse 1.5px 2.5px at 88% 47%, rgb(24 24 27 / 22%) 60%, transparent 100%),
+    repeating-linear-gradient(108deg, rgb(24 24 27 / 2%) 0 0.7px, transparent 0.7px 7px);
+  background-size: auto, auto, auto, auto, auto, 71px 83px, 97px 89px, 113px 127px, 137px 109px, 12px 12px;
+}
+
+@media (max-width: 640px) {
+  .bg-luna-coat {
+    background-image:
+      radial-gradient(ellipse 12rem 10rem at 4% 14%, rgb(24 24 27 / 8%) 0 18%, transparent 74%),
+      radial-gradient(ellipse 14rem 10rem at 96% 29%, rgb(24 24 27 / 7%) 0 16%, transparent 76%),
+      radial-gradient(ellipse 13rem 11rem at 16% 84%, rgb(24 24 27 / 7%) 0 18%, transparent 77%),
+      radial-gradient(ellipse 15rem 11rem at 88% 78%, rgb(24 24 27 / 8%) 0 16%, transparent 75%),
+      radial-gradient(ellipse 2px 1.5px at 13% 21%, rgb(24 24 27 / 24%) 60%, transparent 100%),
+      radial-gradient(ellipse 1.5px 2px at 66% 63%, rgb(24 24 27 / 20%) 60%, transparent  100%),
+      radial-gradient(ellipse 2.5px 1.5px at 37% 82%, rgb(24 24 27 / 22%) 60%, transparent 100%),
+      repeating-linear-gradient(108deg, rgb(24 24 27 / 2%) 0 0.7px, transparent 0.7px 7px);
+    background-size: auto, auto, auto, auto, 71px 83px, 97px 89px, 113px 127px, 12px 12px;
+  }
+}
+
+@layer components {
+  .ui-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid tokens.$border;
+    border-radius: 0.75rem;
+    color: tokens.$ink;
+    background: tokens.$paper;
+    font: inherit;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: background-color 0.2s tokens.$ease-ui, border-color 0.2s tokens.$ease-ui,
+      box-shadow 0.2s tokens.$ease-ui, transform 0.2s tokens.$ease-ui;
+
+    &:hover:not(:disabled) { border-color: tokens.$border-strong; background: #fafafa; }
+    &:active:not(:disabled) { transform: scale(0.97); }
+    &:focus-visible { outline: 2px solid tokens.$ink; outline-offset: 2px; }
+    &:disabled { cursor: not-allowed; opacity: 0.45; }
+
+    &--primary {
+      border: 2px solid tokens.$ink;
+      font-weight: 700;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 8%);
+    }
+
+    &--secondary { color: tokens.$ink; }
+    &--muted { background: tokens.$surface-muted; }
+    &--selected {
+      border: 2px solid tokens.$ink;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+    }
+    &--icon { padding: 0.625rem; }
+    &--sm { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
+    &--md { padding: 0.625rem 1rem; font-size: 0.875rem; }
+    &--lg { padding: 0.875rem 1.5rem; font-size: 0.875rem; }
+  }
+
+  .ui-card {
+    background: tokens.$paper;
+    border: 1px solid tokens.$border;
+
+    &--panel { border-radius: 1.5rem; }
+    &--raised {
+      border-radius: 1.75rem;
+      box-shadow: 0 8px 18px rgb(0 0 0 / 6%);
+    }
+    &--subtle { border-radius: 1.25rem; background: #fafafa; }
+  }
+
+  .section-heading {
+    .section-kicker { vertical-align: middle; }
+    .section-description { margin-inline: auto; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .coat-parallax-background { transition: none; }
+  .luna-cursor__head,
+  .luna-cursor__expression { animation: none; }
+}

@@ -1,0 +1,22 @@
+$ink: #09090b;
+$paper: #fff;
+$surface-muted: #f4f4f5;
+$border: #e4e4e7;
+$border-strong: #a1a1aa;
+$text-muted: #52525b;
+$font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Space Grotesk', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+$ease-ui: cubic-bezier(0.16, 1, 0.3, 1);
+
+:root {
+  --color-ink: #{$ink};
+  --color-paper: #{$paper};
+  --color-surface-muted: #{$surface-muted};
+  --color-border: #{$border};
+  --color-border-strong: #{$border-strong};
+  --color-text-muted: #{$text-muted};
+  --font-sans: #{$font-sans};
+  --font-display: #{$font-display};
+  --font-mono: #{$font-mono};
+}
