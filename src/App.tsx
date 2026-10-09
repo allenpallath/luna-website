@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import SniffRadar from './components/SniffRadar';
+import PawScrollTransition from './components/PawScrollTransition';
 import DoorPeekShowcase from './components/DoorPeekShowcase';
 import VacuumCleaner from './components/VacuumCleaner';
 import DeliveryGuyAlert from './components/DeliveryGuyAlert';
@@ -18,10 +19,15 @@ export default function App() {
       {/* Navigation Header */}
       <Navbar />
 
-      {/* Flagship content follows a consistent section flow below the hero. */}
+      {/* Main Flagship Content Stream with Dog-Paw Scroll Transition */}
       <main className="relative z-10 w-full overflow-x-hidden">
-        <HeroSection />
-        <SniffRadar />
+        {/* Pinned Paw Scroll Transition: Hero Section -> SuperSniff */}
+        <PawScrollTransition
+          currentSection={<HeroSection />}
+          nextSection={<SniffRadar />}
+        />
+
+        {/* Subsequent Sections */}
         <DoorPeekShowcase />
         <VacuumCleaner />
         <DeliveryGuyAlert />

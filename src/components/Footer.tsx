@@ -40,7 +40,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-zinc-50 text-zinc-600 py-16 border-t border-zinc-200 overflow-hidden">
+    <footer className="relative bg-zinc-50/90 backdrop-blur-sm text-zinc-600 py-16 border-t border-zinc-200 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Grid */}

@@ -43,17 +43,9 @@ section[id]:not(#overview) {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url('/images/luna-roan-pattern.svg');
-  background-position: center 0;
-  background-repeat: repeat;
-  background-size: 900px 900px;
   opacity: 0;
   will-change: background-position, opacity;
   transition: opacity 180ms linear;
-}
-
-@media (max-width: 640px) {
-  .coat-parallax-background { background-size: 520px 520px; }
 }
 
 .luna-cursor {
@@ -205,4 +197,20 @@ section[id]:not(#overview) {
   .coat-parallax-background { transition: none; }
   .luna-cursor__head,
   .luna-cursor__expression { animation: none; }
+  .luna-cursor__paw { transition: none; }
+
+  .paw-scroll-transition {
+    display: flex;
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  .paw-scroll-top-sheet {
+    position: relative;
+    inset: auto;
+    height: auto;
+    order: -1;
+  }
+
+  .paw-scroll-actor { display: none; }
 }

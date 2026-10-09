@@ -26,7 +26,6 @@ export default function CoatParallaxBackground() {
     updateBackground();
     window.addEventListener('scroll', updateBackground, { passive: true });
     window.addEventListener('resize', updateBackground);
-
     return () => {
       window.removeEventListener('scroll', updateBackground);
       window.removeEventListener('resize', updateBackground);
@@ -34,5 +33,5 @@ export default function CoatParallaxBackground() {
     };
   }, []);
 
-  return <div ref={layerRef} className="coat-parallax-background" aria-hidden="true" />;
+  return <div ref={layerRef} className="bg-luna-coat coat-parallax-background" aria-hidden="true" />;
 }

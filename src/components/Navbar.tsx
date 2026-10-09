@@ -20,6 +20,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [statusIndex, setStatusIndex] = useState(0);
 
@@ -30,8 +31,18 @@ export default function Navbar() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-2.5 sm:py-3 bg-white/70 backdrop-blur-lg border-b border-zinc-200/70 shadow-sm transition-colors duration-300">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled
+        ? 'py-2 sm:py-2.5 bg-white/95 backdrop-blur-xl border-b border-zinc-200 shadow-sm'
+        : 'py-3 sm:py-4 bg-white/80 backdrop-blur-md border-b border-zinc-100'
+    }`}>
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center gap-2 sm:gap-4">
         {/* Brand */}
         <a href="#overview" className="flex shrink-0 items-center gap-2.5 sm:gap-3 group">

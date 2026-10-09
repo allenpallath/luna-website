@@ -1,6 +1,6 @@
 # Luna Pro
 
-A playful, single-page profile for Luna the English Cocker Spaniel, built with React, TypeScript, Vite, Tailwind CSS, and SCSS. The page includes interactive sniffing and vacuum demos, a treat-catching canvas game, a photo gallery, and a roan coat parallax background below the hero.
+A playful, single-page profile for Luna the English Cocker Spaniel, built with React, TypeScript, Vite, Tailwind CSS, and SCSS. The page includes interactive sniffing and vacuum demos, a treat-catching canvas game, a photo gallery, and a scroll-triggered paw transition.
 
 ## Project structure
 

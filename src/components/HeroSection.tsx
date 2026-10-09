@@ -4,6 +4,9 @@ export default function HeroSection() {
       id="overview" 
       className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-between items-center pt-28 pb-12 px-4 sm:px-6 lg:px-8 text-center select-none overflow-hidden"
     >
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 bg-luna-coat opacity-60 pointer-events-none" />
+
       {/* Main Content Centered Vertically */}
       <div className="my-auto max-w-4xl mx-auto space-y-5 sm:space-y-6 z-10">
         
