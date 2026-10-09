@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
 import { Bone, Play, RotateCcw, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 type GameState = 'idle' | 'playing' | 'gameover';
 
@@ -63,11 +64,11 @@ export default function TreatPhysics() {
 
   useEffect(() => {
     const img1 = new Image();
-    img1.src = '/images/luna_portrait_transparent.png?v=3';
+    img1.src = getPublicAssetUrl('/images/luna_portrait_transparent.png?v=3');
     imgSmileRef.current = img1;
 
     const img2 = new Image();
-    img2.src = '/images/luna_game_open_mouth_transparent.png?v=3';
+    img2.src = getPublicAssetUrl('/images/luna_game_open_mouth_transparent.png?v=3');
     imgOpenMouthRef.current = img2;
   }, []);
 
@@ -89,7 +90,7 @@ export default function TreatPhysics() {
 
   const startGame = () => {
     const canvas = canvasRef.current;
-    const width = canvas ? canvas.width / (window.devicePixelRatio || 1) : 400;
+    const width = canvas ? canvas.width / pixelRatioRef.current : 400;
     
     treatsRef.current = [];
     popupsRef.current = [];
@@ -338,9 +339,9 @@ export default function TreatPhysics() {
       const rect = container.getBoundingClientRect();
       pixelRatioRef.current = dpr;
       canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(460 * dpr);
+      canvas.height = Math.round(rect.height * dpr);
       canvas.style.width = `${rect.width}px`;
-      canvas.style.height = '460px';
+      canvas.style.height = `${rect.height}px`;
 
       const ctx = canvas.getContext('2d');
       ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);

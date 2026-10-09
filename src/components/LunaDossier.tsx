@@ -3,6 +3,47 @@ import { Cpu, Activity, Zap } from 'lucide-react';
 import Card from '../shared/Card';
 import SectionHeader from '../shared/SectionHeader';
 
+const STATS = [
+  { name: "SuperSniff™ Olfactory Precision", value: 100, badge: "100% Max Rating" },
+  { name: "Patio Gate Perimeter Vigilance", value: 99.9, badge: "99.9% Impassable" },
+  { name: "AeroEars™ Silky Cloud Softness", value: 100, badge: "Grade A Luxury" },
+  { name: "Zoomies Velocity & Agility", value: 98, badge: "Supersonic" },
+  { name: "Cuddle Affinity & Human Loyalty", value: 100, badge: "Infinite" }
+];
+
+const SPECS_GRID = [
+  {
+    category: "Vision & Optics",
+    title: "Dual High-Gloss Eyes",
+    spec: "Ultra-wide dynamic range, instant emotional appeal, optimized for doorway peekaboo."
+  },
+  {
+    category: "Acoustic Hardware",
+    title: "Twin AeroEars™",
+    spec: "180° directional wave capture, silky feathered texture, tuned to cheese wrapper crinkles."
+  },
+  {
+    category: "Olfactory Processor",
+    title: "SuperSniff™ Neural Core",
+    spec: "300 million scent receptors with real-time food crumb triangulation."
+  },
+  {
+    category: "Chassis & Finish",
+    title: "Piebald Roan Coating",
+    spec: "Pristine white base with natural black spots, freckled muzzle, and wavy feathering."
+  },
+  {
+    category: "Power Architecture",
+    title: "All-Day Zoomies Battery",
+    spec: "Powered by 100% unconditional love, belly rubs, and healthy protein biscuits."
+  },
+  {
+    category: "Durability Rating",
+    title: "IP68 Slobber Resistant",
+    spec: "Certified against water splashes, muddy paws, and enthusiastic wet kisses."
+  }
+];
+
 export default function LunaDossier() {
   const [liveAge, setLiveAge] = useState({ years: 4, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
 
@@ -35,47 +76,6 @@ export default function LunaDossier() {
     const interval = setInterval(updateAge, 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const stats = [
-    { name: "SuperSniff™ Olfactory Precision", value: 100, badge: "100% Max Rating" },
-    { name: "Patio Gate Perimeter Vigilance", value: 99.9, badge: "99.9% Impassable" },
-    { name: "AeroEars™ Silky Cloud Softness", value: 100, badge: "Grade A Luxury" },
-    { name: "Zoomies Velocity & Agility", value: 98, badge: "Supersonic" },
-    { name: "Cuddle Affinity & Human Loyalty", value: 100, badge: "Infinite" }
-  ];
-
-  const specsGrid = [
-    {
-      category: "Vision & Optics",
-      title: "Dual High-Gloss Eyes",
-      spec: "Ultra-wide dynamic range, instant emotional appeal, optimized for doorway peekaboo."
-    },
-    {
-      category: "Acoustic Hardware",
-      title: "Twin AeroEars™",
-      spec: "180° directional wave capture, silky feathered texture, tuned to cheese wrapper crinkles."
-    },
-    {
-      category: "Olfactory Processor",
-      title: "SuperSniff™ Neural Core",
-      spec: "300 million scent receptors with real-time food crumb triangulation."
-    },
-    {
-      category: "Chassis & Finish",
-      title: "Piebald Roan Coating",
-      spec: "Pristine white base with natural black spots, freckled muzzle, and wavy feathering."
-    },
-    {
-      category: "Power Architecture",
-      title: "All-Day Zoomies Battery",
-      spec: "Powered by 100% unconditional love, belly rubs, and healthy protein biscuits."
-    },
-    {
-      category: "Durability Rating",
-      title: "IP68 Slobber Resistant",
-      spec: "Certified against water splashes, muddy paws, and enthusiastic wet kisses."
-    }
-  ];
 
   const ageItems = [
     { label: 'Years', val: liveAge.years },
@@ -124,7 +124,7 @@ export default function LunaDossier() {
           
           {/* Left: Hardware Specs Matrix (Phone Spec Sheet Style) */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {specsGrid.map((spec) => (
+            {SPECS_GRID.map((spec) => (
               <Card
                 key={spec.title}
                 variant="raised"
@@ -162,7 +162,7 @@ export default function LunaDossier() {
             </div>
 
             <div className="space-y-5">
-              {stats.map((stat) => (
+              {STATS.map((stat) => (
                 <div key={stat.name} className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className="text-zinc-700">{stat.name}</span>

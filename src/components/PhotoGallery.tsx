@@ -4,6 +4,7 @@ import { X, ZoomIn, Image as ImageIcon } from 'lucide-react';
 import Button from '../shared/Button';
 import Card from '../shared/Card';
 import SectionHeader from '../shared/SectionHeader';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 type GalleryCategory = 'portrait' | 'stealth' | 'action';
 type GalleryFilter = 'all' | GalleryCategory;
@@ -17,80 +18,80 @@ interface Artwork {
   desc: string;
 }
 
+const ARTWORKS: Artwork[] = [
+  {
+    id: 1,
+    title: "Luna Pro — Flagship Studio Portrait",
+    category: 'portrait',
+    src: getPublicAssetUrl('/images/luna_portrait.jpg'),
+    tag: "Official Vector Art",
+    desc: "Sitting proudly in full posture, showcasing her silky feathered ears, piebald roan muzzle spots, and tailored collar."
+  },
+  {
+    id: 2,
+    title: "The Stealth Door Peek",
+    category: 'stealth',
+    src: getPublicAssetUrl('/images/luna_peek.jpg'),
+    tag: "Signature Move",
+    desc: "Sub-millimeter door frame surveillance. One curious glossy eye and a floppy black ear monitoring the household."
+  },
+  {
+    id: 3,
+    title: "RoboVac™ Living Vacuum Cleaner",
+    category: 'action',
+    src: getPublicAssetUrl('/images/luna_vacuum.jpg'),
+    tag: "Crumb Clearance",
+    desc: "Autonomous dining room floor sentry sniffing out fallen biscuit crumbs with tail wagging excitement."
+  },
+  {
+    id: 4,
+    title: "Snack Catcher 'NOM' Mode",
+    category: 'action',
+    src: getPublicAssetUrl('/images/luna_game_open_mouth.jpg'),
+    tag: "Catch Motion",
+    desc: "Looking up with mouth open wide in anticipation, ready to intercept falling bones and bacon in mid-air."
+  },
+  {
+    id: 5,
+    title: "Supersonic Zoomies Mode",
+    category: 'action',
+    src: getPublicAssetUrl('/images/luna_zoomies.jpg'),
+    tag: "High Velocity",
+    desc: "Full propulsion activated! Ears flying upwards in the wind, big happy grin, and paws floating in mid-air."
+  },
+  {
+    id: 6,
+    title: "Luna — Chief Scent Detective",
+    category: 'stealth',
+    src: getPublicAssetUrl('/images/luna_sticker_detective.jpg'),
+    tag: "Canine Badge",
+    desc: "Equipped with her magnifying glass and olfactory sensor badge, investigating scent anomalies."
+  },
+  {
+    id: 7,
+    title: "Patio Gate Perimeter Guard",
+    category: 'action',
+    src: getPublicAssetUrl('/images/luna_sticker_guard.jpg'),
+    tag: "Patrol Duty",
+    desc: "Stationed beside her favorite garden plant pots, ensuring no delivery van reaches the door unannounced."
+  },
+  {
+    id: 8,
+    title: "Snack Sentry (Off-Duty)",
+    category: 'portrait',
+    src: getPublicAssetUrl('/images/luna_sleep.jpg'),
+    tag: "Sleep Mode",
+    desc: "Curled up peacefully on her cloud cushion. One ear remains slightly raised to catch any kitchen snack sounds."
+  }
+];
+
 export default function PhotoGallery() {
   const [selectedImage, setSelectedImage] = useState<Artwork | null>(null);
   const [filter, setFilter] = useState<GalleryFilter>('all');
 
-  const artworks: Artwork[] = [
-    {
-      id: 1,
-      title: "Luna Pro — Flagship Studio Portrait",
-      category: 'portrait',
-      src: "/images/luna_portrait.jpg",
-      tag: "Official Vector Art",
-      desc: "Sitting proudly in full posture, showcasing her silky feathered ears, piebald roan muzzle spots, and tailored collar."
-    },
-    {
-      id: 2,
-      title: "The Stealth Door Peek",
-      category: 'stealth',
-      src: "/images/luna_peek.jpg",
-      tag: "Signature Move",
-      desc: "Sub-millimeter door frame surveillance. One curious glossy eye and a floppy black ear monitoring the household."
-    },
-    {
-      id: 3,
-      title: "RoboVac™ Living Vacuum Cleaner",
-      category: 'action',
-      src: "/images/luna_vacuum.jpg",
-      tag: "Crumb Clearance",
-      desc: "Autonomous dining room floor sentry sniffing out fallen biscuit crumbs with tail wagging excitement."
-    },
-    {
-      id: 4,
-      title: "Snack Catcher 'NOM' Mode",
-      category: 'action',
-      src: "/images/luna_game_open_mouth.jpg",
-      tag: "Catch Motion",
-      desc: "Looking up with mouth open wide in anticipation, ready to intercept falling bones and bacon in mid-air."
-    },
-    {
-      id: 5,
-      title: "Supersonic Zoomies Mode",
-      category: 'action',
-      src: "/images/luna_zoomies.jpg",
-      tag: "High Velocity",
-      desc: "Full propulsion activated! Ears flying upwards in the wind, big happy grin, and paws floating in mid-air."
-    },
-    {
-      id: 6,
-      title: "Luna — Chief Scent Detective",
-      category: 'stealth',
-      src: "/images/luna_sticker_detective.jpg",
-      tag: "Canine Badge",
-      desc: "Equipped with her magnifying glass and olfactory sensor badge, investigating scent anomalies."
-    },
-    {
-      id: 7,
-      title: "Patio Gate Perimeter Guard",
-      category: 'action',
-      src: "/images/luna_sticker_guard.jpg",
-      tag: "Patrol Duty",
-      desc: "Stationed beside her favorite garden plant pots, ensuring no delivery van reaches the door unannounced."
-    },
-    {
-      id: 8,
-      title: "Snack Sentry (Off-Duty)",
-      category: 'portrait',
-      src: "/images/luna_sleep.jpg",
-      tag: "Sleep Mode",
-      desc: "Curled up peacefully on her cloud cushion. One ear remains slightly raised to catch any kitchen snack sounds."
-    }
-  ];
-
   const filteredArtworks = filter === 'all' 
-    ? artworks 
-    : artworks.filter(a => a.category === filter);
+    ? ARTWORKS
+    : ARTWORKS.filter(a => a.category === filter);
 
   return (
     <section id="gallery" className="py-20 sm:py-28 md:py-32 relative border-t border-zinc-200/80">

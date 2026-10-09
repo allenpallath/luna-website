@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Sparkles, CheckCircle2 } from 'lucide-react';
 import Button from '../shared/Button';
+import useTimeoutQueue from '../shared/useTimeoutQueue';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 const CRUMB_EMOJIS = ['🍞', '🍪', '🧀', '🥨', '🥐'];
 
@@ -18,7 +20,6 @@ interface Crumb {
   x: number;
   y: number;
   emoji: string;
-  label: string;
 }
 
 interface Position {
@@ -28,29 +29,16 @@ interface Position {
 
 export default function VacuumCleaner() {
   const [crumbs, setCrumbs] = useState<Crumb[]>([
-    { id: 1, x: 25, y: 35, emoji: '🍞', label: 'Toast Crumb' },
-    { id: 2, x: 65, y: 55, emoji: '🍪', label: 'Cookie Dust' },
-    { id: 3, x: 45, y: 75, emoji: '🧀', label: 'Cheese Shaving' },
-    { id: 4, x: 80, y: 30, emoji: '🥨', label: 'Pretzel Fragment' }
+    { id: 1, x: 25, y: 35, emoji: '🍞' },
+    { id: 2, x: 65, y: 55, emoji: '🍪' },
+    { id: 3, x: 45, y: 75, emoji: '🧀' },
+    { id: 4, x: 80, y: 30, emoji: '🥨' }
   ]);
   const [cleanedCount, setCleanedCount] = useState(48);
   const [lunaTarget, setLunaTarget] = useState<Position>({ x: 50, y: 50 });
   const [isHoovering, setIsHoovering] = useState(false);
   const floorRef = useRef<HTMLDivElement>(null);
-  const timersRef = useRef(new Set<number>());
-
-  const schedule = (callback: () => void, delay: number) => {
-    const timer = window.setTimeout(() => {
-      timersRef.current.delete(timer);
-      callback();
-    }, delay);
-    timersRef.current.add(timer);
-  };
-
-  useEffect(() => () => {
-    timersRef.current.forEach((timer) => window.clearTimeout(timer));
-    timersRef.current.clear();
-  }, []);
+  const schedule = useTimeoutQueue();
 
   // Drop crumb on click
   const handleFloorClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -64,8 +52,7 @@ export default function VacuumCleaner() {
       id: `${Date.now()}-${Math.random()}`,
       x,
       y,
-      emoji: randomEmoji,
-      label: 'Fallen Snack'
+      emoji: randomEmoji
     };
 
     setCrumbs(prev => [...prev, newCrumb]);
@@ -178,7 +165,7 @@ export default function VacuumCleaner() {
                   }}
                 >
                   <img
-                    src="/images/luna_vacuum_transparent.png?v=3"
+                    src={getPublicAssetUrl('/images/luna_vacuum_transparent.png?v=3')}
                     alt="Luna Vacuuming Crumbs"
                     className="w-full h-auto object-contain filter drop-shadow-md select-none"
                   />

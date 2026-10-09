@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import getPublicAssetUrl from './getPublicAssetUrl';
 
 export default function LunaCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -24,8 +25,8 @@ export default function LunaCursor() {
 
   return (
     <div ref={cursorRef} className="luna-cursor" aria-hidden="true">
-      <img className="luna-cursor__head" src="/images/luna_portrait_transparent.png" alt="" draggable={false} />
-      <img className="luna-cursor__expression" src="/images/luna_game_open_mouth_transparent.png" alt="" draggable={false} />
+      <img className="luna-cursor__head" src={getPublicAssetUrl('/images/luna_portrait_transparent.png')} alt="" draggable={false} />
+      <img className="luna-cursor__expression" src={getPublicAssetUrl('/images/luna_game_open_mouth_transparent.png')} alt="" draggable={false} />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,7 +117,20 @@ export default function PawScrollTransition({ currentSection, nextSection }: Paw
       mm.add('(max-width: 767px)', () => createTransition(true));
     }, containerRef);
 
-    return () => ctx.revert();
+    const hashNavigationFrame = window.location.hash
+      ? requestAnimationFrame(() => {
+          const targetId = decodeURIComponent(window.location.hash.slice(1));
+          document.getElementById(targetId)?.scrollIntoView({
+            block: 'start',
+            behavior: 'instant'
+          });
+        })
+      : 0;
+
+    return () => {
+      if (hashNavigationFrame) cancelAnimationFrame(hashNavigationFrame);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -138,7 +152,7 @@ export default function PawScrollTransition({ currentSection, nextSection }: Paw
         style={{ width: 'min(40vh, 520px)' }}
       >
         <img
-          src="/images/luna_paw_top_transparent.png?v=5"
+          src={getPublicAssetUrl('/images/luna_paw_top_transparent.png?v=5')}
           alt="Luna's Paw Grabbing Page"
           className="block h-auto w-full object-contain filter drop-shadow-[0_-15px_30px_rgba(0,0,0,0.35)]"
         />

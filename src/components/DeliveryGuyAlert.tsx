@@ -3,22 +3,25 @@ import { Shield, Bell, CheckCircle2, Radio } from 'lucide-react';
 import Button from '../shared/Button';
 import Card from '../shared/Card';
 import SectionHeader from '../shared/SectionHeader';
+import useTimeoutQueue from '../shared/useTimeoutQueue';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 export default function DeliveryGuyAlert() {
   const [isSimulating, setIsSimulating] = useState(false);
   const [securityStatus, setSecurityStatus] = useState('Standby • Patio Perimeter 100% Secure');
   const [scaredScootersCount, setScaredScootersCount] = useState(148);
+  const schedule = useTimeoutQueue();
 
   const triggerSecuritySimulation = () => {
     if (isSimulating) return;
     setIsSimulating(true);
     setSecurityStatus('ALERT: DELIVERY SCOOTER DETECTED AT 100M');
 
-    setTimeout(() => {
+    schedule(() => {
       setSecurityStatus('PATROL_OS: DEPLOYING AUDIO WARNING PROTOCOL 🐾');
     }, 1000);
 
-    setTimeout(() => {
+    schedule(() => {
       setSecurityStatus('THREAT NEUTRALIZED • PARCEL DROPPED SAFELY AT GATE');
       setScaredScootersCount(c => c + 1);
       setIsSimulating(false);
@@ -57,7 +60,7 @@ export default function DeliveryGuyAlert() {
               {/* Guard Illustration */}
               <div className="relative aspect-square max-h-[380px] sm:max-h-[420px] mx-auto rounded-2xl overflow-hidden bg-zinc-50 border border-zinc-200 flex items-center justify-center p-3">
                 <img 
-                  src="/images/luna_sticker_guard.jpg" 
+                  src={getPublicAssetUrl('/images/luna_sticker_guard.jpg')}
                   alt="Luna guarding patio gate illustration"
                   className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 />

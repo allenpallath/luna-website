@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
 import { Cpu, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 const BISCUITS = [
   { id: 'biscuit', name: 'Golden Honey Biscuit', icon: '🍪', x: 72, y: 32, note: 'Freshly baked crunch with sweet honey aroma.' },
@@ -178,7 +179,7 @@ export default function SniffRadar() {
                 {/* Sniffing Luna Image */}
                 <div className="relative w-28 sm:w-32 aspect-square flex items-center justify-center">
                   <img 
-                    src="/images/luna_sniffing_transparent.png?v=5" 
+                    src={getPublicAssetUrl('/images/luna_sniffing_transparent.png?v=5')}
                     alt="Luna Sniffing" 
                     className={`w-full h-full object-contain filter drop-shadow-md transition-transform duration-100 ${
                       meterPercent === 100 ? 'scale-110' : 'scale-100'

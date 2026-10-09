@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Eye, CheckCircle2 } from 'lucide-react';
+import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 
 export default function DoorPeekShowcase() {
   const [peekLevel, setPeekLevel] = useState(2);
@@ -80,7 +81,7 @@ export default function DoorPeekShowcase() {
               {/* Illustration Frame */}
               <div className="relative aspect-square max-h-[380px] sm:max-h-[420px] mx-auto rounded-2xl overflow-hidden bg-zinc-50 border border-zinc-200 flex items-center justify-center p-3">
                 <img 
-                  src="/images/luna_peek.jpg" 
+                  src={getPublicAssetUrl('/images/luna_peek.jpg')}
                   alt="Luna peeking around wooden door illustration"
                   className="w-full h-full object-contain p-2 transition-all duration-500 hover:scale-105"
                 />
