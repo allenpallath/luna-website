@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { X, ZoomIn, Image as ImageIcon } from 'lucide-react';
 import Button from '../shared/Button';
@@ -88,6 +88,18 @@ const ARTWORKS: Artwork[] = [
 export default function PhotoGallery() {
   const [selectedImage, setSelectedImage] = useState<Artwork | null>(null);
   const [filter, setFilter] = useState<GalleryFilter>('all');
+  const lightboxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    const prev = document.activeElement as HTMLElement | null;
+    lightboxRef.current?.focus();
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+      prev?.focus();
+    };
+  }, [selectedImage]);
 
   const filteredArtworks = filter === 'all' 
     ? ARTWORKS
@@ -148,9 +160,10 @@ export default function PhotoGallery() {
             >
               {/* Illustration Frame */}
               <div className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-50 border border-zinc-200 flex items-center justify-center p-3">
-                <img 
-                  src={art.src} 
+                <img
+                  src={art.src}
                   alt={art.title}
+                  loading="lazy"
                   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
                 
@@ -181,8 +194,16 @@ export default function PhotoGallery() {
 
       {/* Lightbox Modal */}
       {selectedImage && (
-        <div 
+        <div
+          ref={lightboxRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedImage.title}
+          tabIndex={-1}
           onClick={() => setSelectedImage(null)}
+          onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === 'Escape') setSelectedImage(null);
+          }}
           className="fixed inset-0 z-50 bg-zinc-950/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
         >
           <div 

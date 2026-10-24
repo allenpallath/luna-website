@@ -1,10 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import getPublicAssetUrl from './getPublicAssetUrl';
 
 export default function LunaCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const [isFinePointer, setIsFinePointer] = useState(false);
 
   useEffect(() => {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    setIsFinePointer(true);
+
     const cursor = cursorRef.current;
     if (!cursor) return;
 
@@ -22,6 +26,8 @@ export default function LunaCursor() {
       window.removeEventListener('pointerleave', hideCursor);
     };
   }, []);
+
+  if (!isFinePointer) return null;
 
   return (
     <div ref={cursorRef} className="luna-cursor" aria-hidden="true">

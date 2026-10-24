@@ -37,7 +37,8 @@ export default function TreatPhysics() {
   const [gameState, setGameState] = useState<GameState>('idle');
   const [displayScore, setDisplayScore] = useState(0);
   const [highScore, setHighScore] = useState(() => {
-    return parseInt(localStorage.getItem('luna_high_score_v2') || '0', 10);
+    try { return parseInt(localStorage.getItem('luna_high_score_v2') || '0', 10); }
+    catch { return 0; }
   });
   const [combo, setCombo] = useState(0);
 
@@ -78,7 +79,7 @@ export default function TreatPhysics() {
     
     if (scoreRef.current > highScore) {
       setHighScore(scoreRef.current);
-      localStorage.setItem('luna_high_score_v2', String(scoreRef.current));
+      try { localStorage.setItem('luna_high_score_v2', String(scoreRef.current)); } catch {}
       confetti({
         particleCount: 45,
         spread: 70,
