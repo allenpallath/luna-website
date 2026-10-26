@@ -14,7 +14,6 @@ const navLinks = [
   { label: "SuperSniff™", href: "#supersniff" },
   { label: "AeroEars™", href: "#aeroears" },
   { label: "RoboVac", href: "#vacuum" },
-  { label: "PatrolOS", href: "#patrolos" },
   { label: "Tech Specs", href: "#specs" },
   { label: "Gallery", href: "#gallery" }
 ];
@@ -82,9 +81,14 @@ export default function Navbar() {
         {/* Nav Links (Desktop) */}
         <nav aria-label="Main navigation" className="hidden xl:flex flex-1 items-center justify-center gap-2 2xl:gap-3 text-[10px] 2xl:text-[11px] font-mono tracking-wide uppercase text-zinc-600">
           {navLinks.map((link) => (
-            <a 
+            <a
               key={link.label}
               href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.href);
+                target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
               className="whitespace-nowrap hover:text-zinc-950 transition-colors py-1 relative group font-medium"
             >
               {link.label}
@@ -115,7 +119,12 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                const target = document.querySelector(link.href);
+                target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
               className="min-h-11 flex items-center px-3 py-2 rounded-xl text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 transition-colors"
             >
               {link.label}

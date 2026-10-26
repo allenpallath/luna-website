@@ -4,7 +4,6 @@ import SniffRadar from './components/SniffRadar';
 import PawScrollTransition from './components/PawScrollTransition';
 import DoorPeekShowcase from './components/DoorPeekShowcase';
 import VacuumCleaner from './components/VacuumCleaner';
-import DeliveryGuyAlert from './components/DeliveryGuyAlert';
 import LunaDossier from './components/LunaDossier';
 import TreatPhysics from './components/TreatPhysics';
 import PhotoGallery from './components/PhotoGallery';
@@ -30,7 +29,6 @@ export default function App() {
         {/* Subsequent Sections */}
         <DoorPeekShowcase />
         <VacuumCleaner />
-        <DeliveryGuyAlert />
         <LunaDossier />
         <TreatPhysics />
         <PhotoGallery />

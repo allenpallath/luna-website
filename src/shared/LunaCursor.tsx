@@ -3,11 +3,15 @@ import getPublicAssetUrl from './getPublicAssetUrl';
 
 export default function LunaCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [isFinePointer, setIsFinePointer] = useState(false);
+  const [isFinePointer, setIsFinePointer] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
+  );
 
   useEffect(() => {
-    if (!window.matchMedia('(pointer: fine)').matches) return;
-    setIsFinePointer(true);
+    if (!isFinePointer) {
+      if (window.matchMedia('(pointer: fine)').matches) setIsFinePointer(true);
+      return;
+    }
 
     const cursor = cursorRef.current;
     if (!cursor) return;
@@ -25,7 +29,7 @@ export default function LunaCursor() {
       window.removeEventListener('pointermove', moveCursor);
       window.removeEventListener('pointerleave', hideCursor);
     };
-  }, []);
+  }, [isFinePointer]);
 
   if (!isFinePointer) return null;
 

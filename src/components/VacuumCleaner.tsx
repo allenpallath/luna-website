@@ -8,11 +8,11 @@ import getPublicAssetUrl from '../shared/getPublicAssetUrl';
 const CRUMB_EMOJIS = ['🍞', '🍪', '🧀', '🥨', '🥐'];
 
 const COMPARISON = [
-  { feature: "Power Source", luna: "100% Love & Snacks", dyson: "Lithium Battery", roomba: "Docking Station" },
-  { feature: "Reaction Time", luna: "0.04 Seconds", dyson: "Manual Retrieval", roomba: "Scheduled Timer" },
-  { feature: "Tail Wagging", luna: "Standard Supersonic", dyson: "None", roomba: "None" },
-  { feature: "Cuddle Rating", luna: "Infinite 10/10", dyson: "0/10 (Painful)", roomba: "0/10 (Cold plastic)" },
-  { feature: "Obstacle Avoidance", luna: "Slips Under Chairs", dyson: "Operator Dependent", roomba: "Gets Stuck On Rugs" }
+  { feature: "Power Source", luna: "100% Love & Snacks", dyson: "Lithium Battery" },
+  { feature: "Reaction Time", luna: "0.04 Seconds", dyson: "Manual Retrieval" },
+  { feature: "Tail Wagging", luna: "Standard Supersonic", dyson: "None" },
+  { feature: "Cuddle Rating", luna: "Infinite 10/10", dyson: "0/10 (Painful)" },
+  { feature: "Obstacle Avoidance", luna: "Slips Under Chairs", dyson: "Operator Dependent" }
 ];
 
 interface Crumb {
@@ -246,9 +246,9 @@ export default function VacuumCleaner() {
 
         </div>
 
-        {/* Hardware Comparison Table: Luna Pro vs Dyson vs Roomba */}
+        {/* Hardware Comparison Table: Luna Pro vs Dyson */}
         <div className="max-w-5xl mx-auto">
-          <div className="p-5 sm:p-8 rounded-3xl bg-white border border-zinc-200 shadow-lg overflow-x-auto">
+          <div className="p-5 sm:p-8 rounded-3xl bg-white border border-zinc-200 shadow-lg">
             <h3 className="font-display font-bold text-xl text-zinc-950 mb-1">
               Flagship Vacuum Benchmark Analysis
             </h3>
@@ -256,13 +256,12 @@ export default function VacuumCleaner() {
               Independent floor clearance testing protocol
             </p>
 
-            <table className="w-full text-left text-xs font-mono min-w-[500px]">
+            <table className="w-full text-left text-xs font-mono">
               <thead>
                 <tr className="border-b border-zinc-200 text-zinc-400 uppercase tracking-wider">
                   <th className="pb-3 font-medium">Metric</th>
                   <th className="pb-3 font-bold text-zinc-950">🐾 Luna Pro</th>
                   <th className="pb-3 font-medium text-zinc-600">Dyson V15</th>
-                  <th className="pb-3 font-medium text-zinc-600">Roomba j7</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-100">
@@ -271,7 +270,6 @@ export default function VacuumCleaner() {
                     <td className="py-3.5 font-semibold text-zinc-800">{row.feature}</td>
                     <td className="py-3.5 font-bold text-zinc-950 bg-zinc-50/50 px-2 rounded-lg">{row.luna}</td>
                     <td className="py-3.5 text-zinc-500">{row.dyson}</td>
-                    <td className="py-3.5 text-zinc-500">{row.roomba}</td>
                   </tr>
                 ))}
               </tbody>
