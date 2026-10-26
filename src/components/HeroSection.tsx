@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section
       id="overview"
-      className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-center items-center pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 text-center select-none overflow-hidden"
+      className="relative min-h-full flex flex-col justify-center items-center pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 text-center select-none overflow-hidden"
     >
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 bg-luna-coat opacity-60 pointer-events-none" />

@@ -24,9 +24,11 @@ export default function PawScrollTransition({ currentSection, nextSection }: Paw
       const mm = gsap.matchMedia();
       const createTransition = (isMobile: boolean) => {
         const restingScaleY = isMobile ? 0.85 : 0.9;
+        // Sink the arm below the largest viewport so iOS toolbar collapse never exposes its cut-off edge.
         const restAtViewportBottom = () => {
           const pawHeight = pawRef.current?.offsetHeight ?? 0;
-          return window.innerHeight - pawHeight * (1 + restingScaleY) / 2;
+          const viewportBottom = Math.max(window.innerHeight, topSheetRef.current?.offsetHeight ?? 0);
+          return viewportBottom - pawHeight * (1 + restingScaleY) / 2 + pawHeight * 0.18;
         };
 
         const tl = gsap.timeline({
@@ -108,7 +110,9 @@ export default function PawScrollTransition({ currentSection, nextSection }: Paw
             y: () => window.innerHeight * 2,
             ease: 'none',
             duration: 0.15
-          }, 0.85);
+          }, 0.85)
+          // The next section is taller than the viewport, so hide the moved-away sheet and paw or they reappear further down it.
+          .set([topSheetRef.current, pawRef.current], { autoAlpha: 0 }, 0.86);
 
         return () => tl.kill();
       };
